@@ -83,6 +83,6 @@ onMounted(() => {
 }
 
 .bottom {
-    padding-top: 3px;
+    padding-top: var(--line-thickness);
 }
 </style>
