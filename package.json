@@ -10,8 +10,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "graphql": "^16.5.0",
-    "graphql-tag": "^2.12.6",
     "vue": "^3.2.36"
   },
   "devDependencies": {
