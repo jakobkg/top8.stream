@@ -56,11 +56,6 @@ if (phaseId !== -1) {
 <style>
 @import '@/assets/base.css';
 
-body {
-  display: flex;
-  place-items: center;
-}
-
 .bracket {
   background-color: var(--bracket-background);
   border-radius: 15px;
