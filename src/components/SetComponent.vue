@@ -83,15 +83,6 @@ onMounted(() => {
 }
 
 .bottom {
-    padding-top: 1px;
-}
-
-.bottom::after {
-    content: "";
-    position: absolute;
-    top: -1px;
-    height: 2px;
-    width: 100%;
-    background-color: var(--color-background-mute);
+    padding-top: 3px;
 }
 </style>

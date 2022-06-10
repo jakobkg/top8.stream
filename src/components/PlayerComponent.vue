@@ -50,7 +50,7 @@ defineProps({
     height: 100%;
     position: absolute;
     left: 0;
-    background-color: var(--score-container-background);
+    background-color: var(--name-score-separator);
 }
 
 .score-container {

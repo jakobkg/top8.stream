@@ -4,8 +4,10 @@
   --bracket-background: #4b4b4b;
 
   --name-container-background: #222222;
-  --score-container-background: #282828;
-  --winner-score-background: rgb(180, 90, 58);
+  --score-container-background: #2f2f2f;
+  --winner-score-background: #d97754;
+
+  --name-score-separator: #202020;
 
   --name-text: #ebebeb;
   --score-text: #bebebe;
