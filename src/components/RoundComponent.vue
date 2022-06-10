@@ -28,7 +28,7 @@ defineProps({
 
 <style>
 .round-name {
-    color: var(--round-name-text);
+    color: var(--round-text);
 }
 
 .round-container {

@@ -12,10 +12,10 @@
   --name-text: #ebebeb;
   --score-text: #bebebe;
   --winner-score-text: #333333;
-  --round-name-text: #ebebeb;
+  --round-text: #ebebeb;
 
   --connector-line: #ebebeb;
-  --line-thickness: 1px;
+  --line-thickness: 2px;
 }
 
 *,
