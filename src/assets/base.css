@@ -1,7 +1,7 @@
 /* Colour scheme */
 :root {
   --page-background: #f2f2f2;
-  --bracket-background: #4b4b4b;
+  --bracket-background: #4b4b4bcd;
 
   --name-container-background: #222222;
   --score-container-background: #2f2f2f;
