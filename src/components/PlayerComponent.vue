@@ -29,11 +29,13 @@ defineProps({
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: var(--color-background-soft);
+    background-color: var(--score-container-background);
 }
 
 .name-container {
     text-align: left;
+    background-color: var(--name-container-background);
+    color: var(--name-text);
     padding-left: 0.5em;
     padding-right: 0.5em;
     width: 130px;
@@ -48,20 +50,21 @@ defineProps({
     height: 100%;
     position: absolute;
     left: 0;
-    background-color: var(--color-background-mute);
+    background-color: var(--score-container-background);
 }
 
 .score-container {
     display: flex;
     align-items: center;
-    text-align: center;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    background-color: var(--color-background-mute);
+    justify-content: center;
+    color: var(--score-text);
+    width: 2em;
+    background-color: var(--score-container-background);
 }
 
 .winner {
-    background-color: rgb(180, 90, 58);
+    background-color: var(--winner-score-background);
+    color: var(--winner-score-text);
     font-weight: bolder;
 }
 </style>

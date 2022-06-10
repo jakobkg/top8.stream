@@ -1,38 +1,18 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* Colour scheme */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  --page-background: #f2f2f2;
+  --bracket-background: #4b4b4b;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
+  --name-container-background: #222222;
+  --score-container-background: #282828;
+  --winner-score-background: rgb(180, 90, 58);
 
-  --vt-c-indigo: #2c3e50;
+  --name-text: #ebebeb;
+  --score-text: #bebebe;
+  --winner-score-text: #333333;
+  --round-name-text: #ebebeb;
 
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
-
-/* semantic color variables for this project */
-
-:root {
-  --color-background: var(--vt-c-white-mute);
-  --color-background-soft: var(--vt-c-black-soft);
-  --color-background-mute: var(--vt-c-black-mute);
-
-  --color-border: var(--vt-c-divider-dark-2);
-  --color-border-hover: var(--vt-c-divider-dark-1);
-
-  --color-heading: var(--vt-c-text-dark-1);
-  --color-text: var(--vt-c-text-dark-2);
+  --connector-line: #ebebeb;
 }
 
 *,
@@ -45,9 +25,10 @@
 }
 
 body {
+  display: flex;
+  place-items: center;
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
+  background: var(--page-background);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
@@ -58,12 +39,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#connector {
-  position: absolute;
-  display:block;
+#app {
+  margin: auto;
+  height: 100%;
 }
 
-#connector > line {
-  stroke: white;
-  stroke-width: 2px;
+#connector {
+  position: absolute;
+  display: block;
+  overflow: visible;
+}
+
+#connector>line {
+  stroke: var(--connector-line);
+  stroke-width: 1px;
 }

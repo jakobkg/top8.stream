@@ -56,37 +56,13 @@ if (phaseId !== -1) {
 <style>
 @import '@/assets/base.css';
 
-#app {
-  margin: auto;
-  height: 100%;
-}
-
-#connector {
-  position: absolute;
-  display: block;
-}
-
-#connector>line {
-  stroke: white;
-  stroke-width: 1px;
-}
-
 body {
   display: flex;
   place-items: center;
 }
 
-.tree {
-  position: absolute;
-}
-
-.tree>line {
-  stroke: aliceblue;
-  stroke-width: 3px;
-}
-
 .bracket {
-  background-color: rgb(112, 106, 106);
+  background-color: var(--bracket-background);
   border-radius: 15px;
   display: grid;
 }
