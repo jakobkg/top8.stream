@@ -15,6 +15,7 @@
   --round-name-text: #ebebeb;
 
   --connector-line: #ebebeb;
+  --line-thickness: 3px;
 }
 
 *,
@@ -54,5 +55,5 @@ body {
 
 #connector>line {
   stroke: var(--connector-line);
-  stroke-width: 1px;
+  stroke-width: var(--line-thickness);
 }
