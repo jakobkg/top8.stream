@@ -1,5 +1,5 @@
 export function readPhaseFromUrl(): number {
-    const query = location.search;
+    const query = location.pathname;
 
     if (query.length <= 1) {
         return -1;

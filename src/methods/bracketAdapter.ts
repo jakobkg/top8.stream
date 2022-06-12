@@ -78,14 +78,19 @@ export function bracketAdapter(data: Phase): Array<BracketStage> {
 
     attachChildren(losersRounds);
     attachChildren(winnersRounds);
-    attachChildren(grands);
 
-    grands.rounds[0].sets[0].children = [];
-    grands.rounds[0].sets[0].children.push(winnersRounds.rounds[winnersRounds.rounds.length - 1].sets[0]);
+    // We might not have the Grand Finals in the bracket, so only attach children and attach Grand Finals to Winners Finals and Losers Finals if they exist
+    if (grands.rounds.length > 0) {
+        attachChildren(grands);
+        grands.rounds[0].sets[0].children = [];
+        grands.rounds[0].sets[0].children.push(winnersRounds.rounds[winnersRounds.rounds.length - 1].sets[0]);
+    
+        if (losersRounds.rounds.length > 0) {
+            grands.rounds[0].sets[0].children.push(losersRounds.rounds[losersRounds.rounds.length - 1].sets[0]);
+        }
 
-    if (losersRounds.rounds.length > 0) {
-        grands.rounds[0].sets[0].children.push(losersRounds.rounds[losersRounds.rounds.length - 1].sets[0]);
     }
+
 
     return [winnersRounds, losersRounds, grands];
 }
