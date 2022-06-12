@@ -2,7 +2,7 @@
 import { onMounted, type PropType } from "vue";
 
 import Player from "./PlayerComponent.vue";
-import { player1Won, player2Won } from "@/methods/bracketSetHelpers";
+import { player1Won, player2Won } from "@/methods/determineWinner";
 
 const props = defineProps({
     set: {

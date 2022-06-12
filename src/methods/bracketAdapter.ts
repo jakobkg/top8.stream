@@ -76,12 +76,15 @@ export function bracketAdapter(data: Phase): Array<BracketStage> {
         }
     });
 
+    // Assemble the tree structure of the bracket
     attachChildren(losersRounds);
     attachChildren(winnersRounds);
 
-    // We might not have the Grand Finals in the bracket, so only attach children and attach Grand Finals to Winners Finals and Losers Finals if they exist
+    // We might not have the Grand Finals in the bracket, so only attach Grand Finals to Winners Finals and Losers Finals if they exist
     if (grands.rounds.length > 0) {
+        // Attach the Grand Finals Reset to the Grand Finals, if applicable
         attachChildren(grands);
+
         grands.rounds[0].sets[0].children = [];
         grands.rounds[0].sets[0].children.push(winnersRounds.rounds[winnersRounds.rounds.length - 1].sets[0]);
     
