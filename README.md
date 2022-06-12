@@ -18,7 +18,8 @@ https://top8.stream/[ID]/[options]
 As an example, this is the link to the top 8 of Ultimate Singles at Genesis 6: `https://www.start.gg/tournament/genesis-6/event/smash-for-switch-singles/brackets/500501/865127`. The phase ID is always the second to last part of the bracket URL, in this case `500501`. Adding this to the top8.stream link gives https://top8.stream/500501, which should look something like this:
 
 `https://top8.stream/500501`
-![An image of the Genesis 6 Ultimate Singles Top 8 bracket, shown on top8.stream](assets/g6ult.png)
+![An image of the Genesis 6 Ultimate Singles Top 8 bracket, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239654-e3f9026e-f27b-4523-8ecf-f10fc7f68008.png)
+
 
 
 ### Options
@@ -38,21 +39,25 @@ The currently available options are:
 Using the options above, we can add `notext` to the end of the URL to remove the round names:
 
 `https://top8.stream/500501/notext`
-![An image of the Genesis 6 Ultimate Singles Top 8 bracket without the round names, shown on top8.stream](assets/g6ultnotext.png)
+![An image of the Genesis 6 Ultimate Singles Top 8 bracket without the round names, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239681-2693e6f7-ad31-485f-ad77-eeed7b0fb237.png)
+
 
 We can also look at the winners side only by adding `w` or `winners`, or look at the losers side by adding `l` or `losers`
 
 `https://top8.stream/500501/losers`
-![An image of the Genesis 6 Ultimate Singles Top 8 losers bracket, shown on top8.stream](assets/g6ultlosers.png)
+![An image of the Genesis 6 Ultimate Singles Top 8 losers bracket, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239702-ea341a34-490d-4960-be60-725b53e083e2.png)
+
 
 The options can also be combined!
 
-`https://top8.stream/500501/winners/notext`
-![An image of the Genesis 6 Ultimate Singles Top 8 winners bracket without round names, shown on top8.stream](assets/g6ultwinnersnotext.png)
+`https://top8.stream/500501/w/notext`<br />
+![An image of the Genesis 6 Ultimate Singles Top 8 winners bracket without round names, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239723-17b5f980-db12-4019-b29d-17f1d9588cef.png)
+
 
 All of these are perfect to add to your OBS stream as a browser source, simply set the URL and you have a bracket graphic ready to display to your viewers when there's a lull in the action!
 
-![An image of the Genesis 6 Ultimate Singles Top 8 losers bracket, shown on top8.stream as a browser source in OBS](assets/obsdefault.png)
+![An image of the Genesis 6 Ultimate Singles Top 8 losers bracket, shown on top8.stream as a browser source in OBS](https://user-images.githubusercontent.com/25484353/173239735-6ecdc3e4-4456-42fa-a144-4abd67a05b26.png)
+
 
 ## Customization
 
@@ -84,7 +89,8 @@ The default style uses the following style parameters, and you can simply copy t
 
 Go crazy!
 
-![top8.stream as an OBS browser source, with some gaudy customizations applied](assets/obsdeargod.png)
+![top8.stream as an OBS browser source, with some gaudy customizations applied](https://user-images.githubusercontent.com/25484353/173239751-04c858d2-b662-4d01-9507-f2010880a537.png)
+
 
 
 ## Development
