@@ -8,8 +8,6 @@ export function bracketAdapter(data: Group): Bracket | never {
     let roundSets: Array<BracketSet>;
     const roundMap = new Set<string>();
 
-    console.log(group);
-
     // If there are no sets, return an empty array without doing all the other stuff
     if (!group.sets) {
         throw new Error("No sets in group");

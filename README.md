@@ -97,6 +97,8 @@ In addition to double elimination brackets as seen above, top8.stream also suppo
 
 ![An 8 player single elimination bracket as shown on top8.stream](https://user-images.githubusercontent.com/25484353/173351183-7d37832e-b22c-4ea6-a489-efbe16bfde60.png)
 
+When showing a single elimination bracket, the `winners` and `losers` options are ignored if provided
+
 Round robins and swiss brackets are not yet supported
 
 ## Development
