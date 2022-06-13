@@ -10,7 +10,7 @@ export function bracketAdapter(data: Group): Bracket | never {
 
     // If there are no sets, return an empty array without doing all the other stuff
     if (!group.sets) {
-        throw new Error("No sets in group");
+        throw new Error("There are no sets in this group");
     }
 
     // Sort the sets by round
@@ -61,7 +61,7 @@ export function bracketAdapter(data: Group): Bracket | never {
         case "ROUND_ROBIN":
             return handleRoundRobin(rounds);
         default:
-            throw new Error(`Unknown or unhandled bracket type ${data.bracketType}`);
+            throw new Error(`Unknown bracket type ${data.bracketType}`);
     }
 }
 

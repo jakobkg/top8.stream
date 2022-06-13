@@ -78,7 +78,6 @@ onMounted(() => {
 .set-container {
     display: flex;
     flex-direction: column;
-    user-select: none;
     margin: auto;
 }
 

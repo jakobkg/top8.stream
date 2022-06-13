@@ -1,4 +1,4 @@
-export async function fetchPhase(groupId: number): Promise<GroupResponse> {
+export async function fetchPhase(groupId: number): Promise<GroupResponse | never> {
 
   const startgg_data: GroupResponse = await fetch("https://startgg-api-proxy.jakobkg.workers.dev/", {
     method: "POST",
@@ -11,7 +11,11 @@ export async function fetchPhase(groupId: number): Promise<GroupResponse> {
     })
   }).then(
     async response => {
-      return await response.json();
+      if (response.ok) {
+        return await response.json();
+      } else {
+        throw new Error(`Got bad response from start.gg: ${response}`)
+      }
     }
   );
 
