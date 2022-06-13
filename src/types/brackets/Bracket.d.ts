@@ -1,0 +1,1 @@
+declare type Bracket = RoundRobin | SingleEliminationBracket | DoubleEliminationBracket;

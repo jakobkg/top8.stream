@@ -19,20 +19,34 @@ if (phaseId !== -1) {
   fetchPhase(phaseId)
     .then((response) => {
       try {
-        const stages = bracketAdapter(response.data.phase);
-        if (!config.losersOnly) {
-          winners.value = stages[0].rounds;
+        const bracket = bracketAdapter(response.data.phaseGroup);
+
+        switch (bracket.type) {
+          case "DOUBLE_ELIMINATION":
+            if (!config.losersOnly) 
+              winners.value = bracket.winners.rounds;
+            
+
+            if (!config.winnersOnly) 
+              losers.value = bracket.losers.rounds;
+            
+
+            if (!config.winnersOnly && !config.losersOnly)
+              grands.value = bracket.grands.rounds;
+
+            break;
+
+          case "SINGLE_ELIMINATION":
+            winners.value = bracket.winners.rounds;
+
+            break;
+
+          case "ROUND_ROBIN":
+            winners.value = bracket.rounds;
         }
 
-        if (!config.winnersOnly) {
-          losers.value = stages[1].rounds;
-        }
-
-        if (!config.winnersOnly && !config.losersOnly)
-        grands.value = stages[2].rounds;
-        
       } catch (error) {
-        console.warn("API response error, invalid phase ID provided");
+        console.warn("uh oh");
         console.warn(error)
       }
     });
@@ -67,7 +81,7 @@ if (phaseId !== -1) {
   justify-content: right;
 }
 
-.bracketstage > * {
+.bracketstage>* {
   margin: 0 25px;
 }
 

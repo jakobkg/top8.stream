@@ -1,6 +1,6 @@
-declare type PhaseResponse = {
+declare type GroupResponse = {
     data: {
-        phase: Phase;
+        phaseGroup: Group;
     },
     extensions: {
         cacheControl: { // This field is not very well documented but I think this is right
@@ -16,8 +16,9 @@ declare type PhaseResponse = {
     actionRecords: Array<unknown>; // I have not been able to find documentation on this field
 }
 
-declare type Phase = {
+declare type Group = {
     name?: string;
+    bracketType: BracketType;
     sets?: {
         nodes: Array<{
             fullRoundText: string;

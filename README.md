@@ -6,7 +6,7 @@
 </div>
 
 ## Usage
-This site creates a visualization of any bracket from start.gg, given the "phase ID" of the bracket. The phase ID is part of the URL of the bracket on start.gg, and is easy to find! Once you have the phase ID of the bracket you'd like a graphic of, simply add it to the end of the link to this site to get a stream friendly graphic!
+This site creates a visualization of any bracket from start.gg, given the "group ID" of the bracket. The group ID is part of the URL of the bracket on start.gg, and is easy to find! Once you have the phase ID of the bracket you'd like a graphic of, simply add it to the end of the link to this site to get a stream friendly graphic!
 
 NOTE: top8.stream only retrieves data from the start.gg when the page is first loaded, so when using top8.stream as a browser source in OBS it's recommended to turn "Refresh browser when scene becomes active" on in the properties of the browser source to ensure you're always showing the most recent available bracket
 
@@ -15,11 +15,10 @@ URL format:
 https://top8.stream/[ID]/[options]
 ```
 
-As an example, this is the link to the top 8 of Ultimate Singles at Genesis 6: `https://www.start.gg/tournament/genesis-6/event/smash-for-switch-singles/brackets/500501/865127`. The phase ID is always the second to last part of the bracket URL, in this case `500501`. Adding this to the top8.stream link gives https://top8.stream/500501, which should look something like this:
+As an example, this is the link to the top 8 of Ultimate Singles at Genesis 6: `https://www.start.gg/tournament/genesis-6/event/smash-for-switch-singles/brackets/500501/865127`. The group ID is the last part of the bracket URL, in this case `865127`. Adding this to the top8.stream link gives https://top8.stream/865127, which should look something like this:
 
-`https://top8.stream/500501`
+`https://top8.stream/865127`
 ![An image of the Genesis 6 Ultimate Singles Top 8 bracket, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239654-e3f9026e-f27b-4523-8ecf-f10fc7f68008.png)
-
 
 
 ### Options
@@ -38,19 +37,19 @@ The currently available options are:
 
 Using the options above, we can add `notext` to the end of the URL to remove the round names:
 
-`https://top8.stream/500501/notext`
+`https://top8.stream/865127/notext`
 ![An image of the Genesis 6 Ultimate Singles Top 8 bracket without the round names, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239681-2693e6f7-ad31-485f-ad77-eeed7b0fb237.png)
 
 
 We can also look at the winners side only by adding `w` or `winners`, or look at the losers side by adding `l` or `losers`
 
-`https://top8.stream/500501/losers`
+`https://top8.stream/865127/losers`
 ![An image of the Genesis 6 Ultimate Singles Top 8 losers bracket, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239702-ea341a34-490d-4960-be60-725b53e083e2.png)
 
 
 The options can also be combined!
 
-`https://top8.stream/500501/w/notext`<br />
+`https://top8.stream/865127/w/notext`<br />
 ![An image of the Genesis 6 Ultimate Singles Top 8 winners bracket without round names, shown on top8.stream](https://user-images.githubusercontent.com/25484353/173239723-17b5f980-db12-4019-b29d-17f1d9588cef.png)
 
 
@@ -92,6 +91,13 @@ Go crazy!
 ![top8.stream as an OBS browser source, with some gaudy customizations applied](https://user-images.githubusercontent.com/25484353/173239751-04c858d2-b662-4d01-9507-f2010880a537.png)
 
 
+### Supported bracket types
+
+In addition to double elimination brackets as seen above, top8.stream also supports single elimination brackets:
+
+![An 8 player single elimination bracket as shown on top8.stream](https://user-images.githubusercontent.com/25484353/173351183-7d37832e-b22c-4ea6-a489-efbe16bfde60.png)
+
+Round robins and swiss brackets are not yet supported
 
 ## Development
 

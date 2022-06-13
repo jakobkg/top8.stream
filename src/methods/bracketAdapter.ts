@@ -1,40 +1,27 @@
 import { StageTypes } from "@/types/StageType"
 import { attachChildren } from "./attachChildren";
 
-export function bracketAdapter(data: Phase): Array<BracketStage> {
-    const phase: Phase = { ...data };
+export function bracketAdapter(data: Group): Bracket | never {
+    const group: Group = { ...data };
     const sets = new Array<BracketSet>();
     const rounds = new Array<BracketRound>();
     let roundSets: Array<BracketSet>;
     const roundMap = new Set<string>();
-    
-    let winnersRounds: BracketStage = {
-        type: StageTypes.WINNERS,
-        rounds: new Array<BracketRound>()
-    };
 
-    let losersRounds: BracketStage= {
-        type: StageTypes.LOSERS,
-        rounds: new Array<BracketRound>()
-    };
-
-    let grands: BracketStage= {
-        type: StageTypes.GRANDS,
-        rounds: new Array<BracketRound>()
-    };
+    console.log(group);
 
     // If there are no sets, return an empty array without doing all the other stuff
-    if (!phase.sets) {
-        return new Array<BracketStage>();
+    if (!group.sets) {
+        throw new Error("No sets in group");
     }
 
     // Sort the sets by round
-    phase.sets.nodes.sort((a, b) => {
+    group.sets.nodes.sort((a, b) => {
         return Math.abs(a.round) - Math.abs(b.round);
     });
 
     // Convert the sets from the start.gg API data to our BracketSet type
-    phase.sets.nodes.forEach((set, index) => {
+    group.sets.nodes.forEach((set, index) => {
         sets.push({
             slots: [
                 {
@@ -65,6 +52,53 @@ export function bracketAdapter(data: Phase): Array<BracketStage> {
         });
     });
 
+    switch (group.bracketType) {
+        case "DOUBLE_ELIMINATION":
+            rounds.reverse();
+            return handleDoubleElim(rounds);
+
+        case "SINGLE_ELIMINATION":
+            return handleSingleElim(rounds);
+    
+        case "ROUND_ROBIN":
+            return handleRoundRobin(rounds);
+        default:
+            throw new Error(`Unknown or unhandled bracket type ${data.bracketType}`);
+    }
+}
+
+function handleRoundRobin(rounds: Array<BracketRound>): RoundRobin {
+    return { type: "ROUND_ROBIN", rounds: new Array<BracketRound>() };
+}
+
+function handleSingleElim(rounds: Array<BracketRound>): SingleEliminationBracket {
+    const stage: BracketStage = {
+        type: StageTypes.WINNERS,
+        rounds: rounds
+    }
+
+    attachChildren(stage);
+
+    return { type: "SINGLE_ELIMINATION", winners: stage };
+}
+
+function handleDoubleElim(rounds: Array<BracketRound>): DoubleEliminationBracket {
+
+    let winnersRounds: BracketStage = {
+        type: StageTypes.WINNERS,
+        rounds: new Array<BracketRound>()
+    };
+
+    let losersRounds: BracketStage = {
+        type: StageTypes.LOSERS,
+        rounds: new Array<BracketRound>()
+    };
+
+    let grands: BracketStage = {
+        type: StageTypes.GRANDS,
+        rounds: new Array<BracketRound>()
+    };
+
     // Separate the rounds into their appropriate stages for ease of sorting
     rounds.forEach((round) => {
         if (round.name.startsWith("Winners")) {
@@ -86,14 +120,16 @@ export function bracketAdapter(data: Phase): Array<BracketStage> {
         attachChildren(grands);
 
         grands.rounds[0].sets[0].children = [];
+
+        // Attach the Winners Finals to the Grand Finals
         grands.rounds[0].sets[0].children.push(winnersRounds.rounds[winnersRounds.rounds.length - 1].sets[0]);
-    
+
+        // Attach the Losers Finals to the Grand Finals, if there is a losers side
         if (losersRounds.rounds.length > 0) {
             grands.rounds[0].sets[0].children.push(losersRounds.rounds[losersRounds.rounds.length - 1].sets[0]);
         }
-
     }
 
 
-    return [winnersRounds, losersRounds, grands];
+    return { type: "DOUBLE_ELIMINATION", winners: winnersRounds, losers: losersRounds, grands: grands };
 }

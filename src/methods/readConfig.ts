@@ -7,7 +7,6 @@ export function readConfig(): Config {
 
     const options: Array<string> = [];
     location.pathname.split("/").forEach((option) => options.push(option.toLocaleLowerCase()));
-    console.log(location)
 
     if (options.includes("notext")) {
         config.showRoundNames = false;
