@@ -52,12 +52,11 @@ export function bracketAdapter(data: Group): Bracket | never {
 
     switch (group.bracketType) {
         case "DOUBLE_ELIMINATION":
-            rounds.reverse();
             return handleDoubleElim(rounds);
 
         case "SINGLE_ELIMINATION":
             return handleSingleElim(rounds);
-    
+
         case "ROUND_ROBIN":
             return handleRoundRobin(rounds);
         default:
@@ -66,9 +65,33 @@ export function bracketAdapter(data: Group): Bracket | never {
 }
 
 function handleRoundRobin(rounds: Array<BracketRound>): RoundRobin {
+    const players = new Set<string>();
+    const sets = new Map<string, Array<BracketSet>>();
+
+    rounds.forEach((round) => {
+        round.sets.forEach((set) => {
+            set.slots.forEach((slot) => {
+                if (slot.name) {
+                    if (!players.has(slot.name)) {
+                        players.add(slot.name);
+                        sets.set(slot.name, new Array<BracketSet>());
+                    }
+
+                    sets.get(slot.name)?.push(set);
+
+                }
+            })
+        })
+    })
+
     return { type: "ROUND_ROBIN", rounds: new Array<BracketRound>() };
 }
 
+/**
+ * single elimination bracket parsing method, takes an array of rounds and creates a SingleEliminationBracket object
+ * @param rounds The array of rounds to parse
+ * @returns a SingleEliminationBracket
+ */
 function handleSingleElim(rounds: Array<BracketRound>): SingleEliminationBracket {
     const stage: BracketStage = {
         type: StageTypes.WINNERS,
@@ -80,19 +103,25 @@ function handleSingleElim(rounds: Array<BracketRound>): SingleEliminationBracket
     return { type: "SINGLE_ELIMINATION", winners: stage };
 }
 
+/**
+ * Double elimination bracket parsing method, takes an array of rounds and creates a DoubleEliminationBracket object
+ * @param rounds The array of rounds to parse
+ * @returns a DoubleEliminationBracket
+ */
 function handleDoubleElim(rounds: Array<BracketRound>): DoubleEliminationBracket {
 
-    let winnersRounds: BracketStage = {
+    // Create containers for the winners bracket, losers bracket and grand finals
+    const winnersRounds: BracketStage = {
         type: StageTypes.WINNERS,
         rounds: new Array<BracketRound>()
     };
 
-    let losersRounds: BracketStage = {
+    const losersRounds: BracketStage = {
         type: StageTypes.LOSERS,
         rounds: new Array<BracketRound>()
     };
 
-    let grands: BracketStage = {
+    const grands: BracketStage = {
         type: StageTypes.GRANDS,
         rounds: new Array<BracketRound>()
     };
@@ -100,11 +129,11 @@ function handleDoubleElim(rounds: Array<BracketRound>): DoubleEliminationBracket
     // Separate the rounds into their appropriate stages for ease of sorting
     rounds.forEach((round) => {
         if (round.name.startsWith("Winners")) {
-            winnersRounds.rounds.push(round);
+            winnersRounds.rounds.unshift(round);
         } else if (round.name.startsWith("Losers")) {
-            losersRounds.rounds.push(round);
+            losersRounds.rounds.unshift(round);
         } else if (round.name.startsWith("Grand")) {
-            grands.rounds.push(round);
+            grands.rounds.unshift(round);
         }
     });
 
@@ -114,6 +143,11 @@ function handleDoubleElim(rounds: Array<BracketRound>): DoubleEliminationBracket
 
     // We might not have the Grand Finals in the bracket, so only attach Grand Finals to Winners Finals and Losers Finals if they exist
     if (grands.rounds.length > 0) {
+        // If a Grand Finals Reset is in the bracket, make sure it's after the first Grand Finals
+        if (grands.rounds.length === 2 && grands.rounds[0].name.includes("Reset")) {
+            grands.rounds.reverse();
+        }
+
         // Attach the Grand Finals Reset to the Grand Finals, if applicable
         attachChildren(grands);
 
@@ -127,7 +161,6 @@ function handleDoubleElim(rounds: Array<BracketRound>): DoubleEliminationBracket
             grands.rounds[0].sets[0].children.push(losersRounds.rounds[losersRounds.rounds.length - 1].sets[0]);
         }
     }
-
 
     return { type: "DOUBLE_ELIMINATION", winners: winnersRounds, losers: losersRounds, grands: grands };
 }
