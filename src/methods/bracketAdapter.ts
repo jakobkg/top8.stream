@@ -15,7 +15,7 @@ export function bracketAdapter(data: Group): Bracket | never {
 
     // Sort the sets by round
     group.sets.nodes.sort((a, b) => {
-        return Math.abs(a.round) - Math.abs(b.round);
+        return Math.abs(b.round) - Math.abs(a.round);
     });
 
     // Convert the sets from the start.gg API data to our BracketSet type
