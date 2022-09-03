@@ -129,7 +129,7 @@ function handleDoubleElim(rounds: Array<BracketRound>): DoubleEliminationBracket
     // Separate the rounds into their appropriate stages for ease of sorting
     rounds.forEach((round) => {
         if (round.name.startsWith("Winners")) {
-            winnersRounds.rounds.unshift(round);
+            winnersRounds.rounds.push(round);
         } else if (round.name.startsWith("Losers")) {
             losersRounds.rounds.unshift(round);
         } else if (round.name.startsWith("Grand")) {
