@@ -55,7 +55,7 @@ if (groupId !== -1) {
   <div v-if="groupId === -1" style="text-align: center;">
     <h2>Hello!</h2> To use this site, add the group number of a start.gg bracket to the end of the address bar.
     <br />
-    For example: <a href="https://top8.stream/1162721">https://top8.stream/1162721</a>
+    For example: <a href="https://top8.stream/1819860">https://top8.stream/1819860</a>
     <br />
     For more information, see <a href="https://github.com/jakobkg/top8.stream">the Github page</a>
   </div>
