@@ -62,38 +62,3 @@ if (groupId !== -1) {
     {{ message }}
   </div>
 </template>
-
-<style>
-@import '@/assets/base.css';
-
-.bracket {
-  background-color: var(--bracket-background);
-  border-radius: 15px;
-  display: grid;
-  user-select: none;
-}
-
-.bracketstage {
-  display: flex;
-  justify-content: right;
-}
-
-.bracketstage>* {
-  margin: 0 25px;
-}
-
-.winners {
-  grid-row: 1;
-  grid-column: 1;
-}
-
-.losers {
-  grid-row: 2;
-  grid-column: 1;
-}
-
-.grands {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-}
-</style>
