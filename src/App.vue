@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-import Round from './components/RoundComponent.vue';
 import { bracketAdapter } from './methods/bracketAdapter';
 import { fetchPhase } from './methods/fetchPhase';
 import { readConfig } from './methods/readConfig';
 import { readPhaseFromUrl } from './methods/readPhaseFromUrl';
+import FrontPage from './components/FrontPage.vue';
+import BracketComponent from './components/BracketComponent.vue';
 
 let winners = ref(new Array<BracketRound>());
 let losers = ref(new Array<BracketRound>());
@@ -52,24 +53,11 @@ if (groupId !== -1) {
 </script>
 
 <template>
-  <div v-if="groupId === -1" style="text-align: center;">
-    <h2>Hello!</h2> To use this site, add the group number of a start.gg bracket to the end of the address bar.
-    <br />
-    For example: <a href="https://top8.stream/1819860">https://top8.stream/1819860</a>
-    <br />
-    For more information, see <a href="https://github.com/jakobkg/top8.stream">the Github page</a>
-  </div>
-  <div v-else-if="message.length === 0" class="bracket">
-    <div class="winners bracketstage" style="grid-row: 1; grid-column: 1;">
-      <Round v-for="round in winners" :round="round" :show-round-name="config.showRoundNames" v-bind:key="round.name" />
-    </div>
-    <div class="losers bracketstage">
-      <Round v-for="round in losers" :round="round" :show-round-name="config.showRoundNames" v-bind:key="round.name" />
-    </div>
-    <div class="grands bracketstage">
-      <Round v-for="round in grands" :round="round" :show-round-name="config.showRoundNames" v-bind:key="round.name" />
-    </div>
-  </div>
+  <FrontPage v-if="groupId === -1" />
+
+  <BracketComponent :bracket="{ winners, losers, grands }" :config="config" v-else-if="message.length === 0"
+    class="bracket" />
+
   <div v-else>
     {{ message }}
   </div>
