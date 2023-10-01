@@ -7,6 +7,9 @@
         <input type="text" placeholder="start.gg bracket link...">
         <input type="button" value="Go!">
     </div>
+    <p class="info">
+        For more info and instructions, see the project <a href="https://github.com/jakobkg/top8.stream">GitHub page</a> :)
+    </p>
 </template>
 
 <script setup lang="ts">
@@ -44,6 +47,12 @@ h1 {
 
 p {
     font-size: large;
+    text-align: center;
+
+    &.info {
+        font-size: small;
+        text-align: right;
+    }
 }
 
 input[type=text] {
